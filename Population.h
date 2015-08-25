@@ -37,6 +37,6 @@ public:
 private:
 	// Variables 
 	int pop_size;
-	vector <double> population_set;
+	vector <Individual> population_set;
 };
 #endif //Population_H

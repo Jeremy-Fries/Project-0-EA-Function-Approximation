@@ -15,7 +15,9 @@ int Population::get_pop_size(){
 // Build_Population
 void Population::build_pop(Individual* pI){
 	for (int p = 0; p < pop_size; p++){
-		population_set.push_back(pI->build_solution());	// TODO- fix error ---------///////////----------
+		pI->build_solution();
+		population_set.push_back(*pI);	// TODO- fix error ---------///////////----------
+		// push back fit_rating as well! 
 	}
 }
 // --------------------------------------------------

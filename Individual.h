@@ -26,6 +26,21 @@ public:
 	double rand0_100(void);
 		// returns random number between 0-100
 	// --------------------------------------------------
+	// input_x function
+	double input_x();
+	// --------------------------------------------------
+	// approx function
+	double approx_func();
+	// --------------------------------------------------
+	// real function
+	double real_func();
+	// --------------------------------------------------
+	// fitness_rating()
+	double fitness_rating();
+	// --------------------------------------------------
+	// Compare fit_rating
+
+	// --------------------------------------------------
 	// Set Number of Functions
 	void set_num_functions(int);
 	// Get Number of Functions
@@ -33,10 +48,14 @@ public:
 	// --------------------------------------------------
 	// Build Solution
 	void build_solution();
+	// return solution set
+	//get_solution_set()
 
 private:
 	// Variables 
 	int num_functions;
 	vector <double> solution_set;
+	double fit_rating, approx_value, real_value;
+
 };
 #endif //Individual_H
