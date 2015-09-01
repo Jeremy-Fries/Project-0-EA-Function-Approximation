@@ -20,8 +20,19 @@ public:
 	int get_pop_size();
 	// --------------------------------------------------
 		// Build_Population
-	void build_pop(Individual* pI);
+	void build_pop(int n);
 	// --------------------------------------------------
+		// Get population_set
+	vector <Individual>& get_population_set();
+	// --------------------------------------------------
+	// double f_approx(double x_pos, vector<double> soln);
+	// --------------------------------------------------
+
+
+
+
+
+
 	// Replicate Function
 
 
@@ -37,6 +48,7 @@ public:
 private:
 	// Variables 
 	int pop_size;
+	double x_pos;
 	vector <Individual> population_set;
 };
 #endif //Population_H
