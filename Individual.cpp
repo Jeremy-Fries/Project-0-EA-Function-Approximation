@@ -27,53 +27,108 @@ double Individual::rand0_100(){
 	return r;
 }
 // --------------------------------------------------
-// input_x function
-double Individual::input_x(){
-	int x = rand0_1();
-	return x;
+	// Set x position to desired value
+void Individual::set_x_pos(int x){
+	x_pos = x;
 }
-// --------------------------------------------------
-// approx function
-double Individual::approx_func(){
-	// population_set's value at input_x()
-	return approx_value;
+	// Set x position random number between 0 and .1
+void Individual::set_x_pos0_p1(){
+	x_pos = (double)rand() / RAND_MAX*.1;
 }
-// --------------------------------------------------
-// real function
-double Individual::real_func(){
-	// real functions value at input_x()
-	return real_value;
+	// Set x position random number between 0 and 1
+void Individual::set_x_pos0_1(){
+	x_pos = (double)rand() / RAND_MAX;
 }
-// --------------------------------------------------
-// fitness_rating()
-double Individual::fitness_rating(){
-	fit_rating = -abs(real_func() - approx_func());
+	// Set x position random number between 0 and 10
+void Individual::set_x_pos0_10(){
+	x_pos = (double)rand() / RAND_MAX * 10;
 }
-// --------------------------------------------------
-// Compare fit_rating 
-// compare all population_set's fit_rating's,
-// select top some % for replication and bottom some % for replacement/mutation
-
-// --------------------------------------------------
-
-
+	// Set x position random number between 0 and 100
+void Individual::set_x_pos0_100(){
+	x_pos = (double)rand() / RAND_MAX * 100;
+}
+	// Get x position
+double Individual::get_x_pos(){
+	return x_pos;
+}
+void Individual::display_x_pos(){
+	cout << "\t x_pos is: " << x_pos << endl;
+}
 // --------------------------------------------------
 	//Set Amount of Functions
 void Individual::set_num_functions(int n){
-	n = num_functions;
+	num_functions = n;
 }
 	// Get Amount of Functions
 int Individual::get_num_functions(){
 	return num_functions;
 }
 // --------------------------------------------------
+	// Build Real Coefficient Set
+void Individual::build_real_set(int n){
+	num_functions = n;
+	for (int s = 0; s < (2 * num_functions); s++)
+	{
+		real_set.push_back(.05);	// inputs 0.5 for a1, b1, a2, b2, ...
+	}
+}
+// --------------------------------------------------
 	// Build Solutions
- void Individual::build_solution(){
+void Individual::build_solution(int n){
+	num_functions = n;
 	for (int s = 0; s < (2 * num_functions); s++)
 	{
 		solution_set.push_back(rand0_p1());	// random 0-.1
 
 		// TODO- fill with 0-.1, 0-1, 0-10, 0-100 random value solutions
 	}
+}
+// --------------------------------------------------
+	// Get Solutions
+vector<double>& Individual::get_solution_set() {
+	cout << endl << "Solution set is: ";
+	std::copy(solution_set.begin(), solution_set.end(), std::ostream_iterator<double>(std::cout, " "));
+	return solution_set;
+}
+// --------------------------------------------------
+	// Funtions - will be implemented in a header file at a later time
+double Individual::f_1(double x, double a1, double b1){
+	double f = (a1*abs(x*x)) + b1;
+	return f;
+}
+double Individual::f_2(double x, double a2, double b2){
+	double f = a2*(sin(b2*x));
+	return f;
+}
+// --------------------------------------------------
+	// Approx function Value - solution_set's value at x_pos					// TODO-Need to set x_pos before calling
+double Individual::approx_func(){
+	double x = get_x_pos();
+	double a, b;
+	a = f_1(x, solution_set.at(0), solution_set.at(1));
+	//b = f_2(x, solution_set.at(2), solution_set.at(3));
+	approx_value = (a);
+	//approx_value = (a + b);
+	//cout << endl << "Approximate Value is: " << approx_value << endl;
+	return approx_value;
+}
+// --------------------------------------------------
+	// Real Function Value - real coefficient_set's value at x_pos
+double Individual::real_func(){
+	double x = get_x_pos();
+	double a, b;
+	a = f_1(x, real_set.at(0), real_set.at(1));
+	//b = f_2(x, real_set.at(2), real_set.at(3));
+	real_value = (a);
+	//real_value = (a + b);
+	//cout << endl << "real value is: " << real_value << endl;
+	return real_value;
+}
+// --------------------------------------------------
+	// Fitness Rating
+double Individual::fitness_rating(){
+	fit_rating = -abs(real_func() - approx_func());
+	cout << endl << "Fitness Rating is: " << fit_rating;
+	return fit_rating;
 }
 // --------------------------------------------------
