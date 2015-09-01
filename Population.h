@@ -27,9 +27,15 @@ public:
 	// --------------------------------------------------
 	// double f_approx(double x_pos, vector<double> soln);
 	// --------------------------------------------------
-
-
-
+		// Random integer between 0 and pop_size
+	int rand_int();
+	// --------------------------------------------------
+		// Build New Population
+	void build_new_pop();
+	// --------------------------------------------------
+	// Get New Population Sset
+	vector <Individual>& get_new_population_set();
+	// --------------------------------------------------
 
 
 
@@ -50,5 +56,6 @@ private:
 	int pop_size;
 	double x_pos;
 	vector <Individual> population_set;
+	vector <Individual> new_population_set;
 };
 #endif //Population_H

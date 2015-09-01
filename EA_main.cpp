@@ -36,7 +36,7 @@ int main()
 	Population* pP = &population_1;
 
 	// Set Number of Functions
-	pI->set_num_functions(1);			
+	pI->set_num_functions(2);			
 
 	// Set Population Size
 	pP->set_pop_size(10);
@@ -57,6 +57,10 @@ int main()
 	// Build Population
 	pP->build_pop(pI->get_num_functions());
 	pP->get_population_set();
+	//---------------------------------------------
+	// Build New Population
+	pP->build_new_pop();
+	pP->get_new_population_set();
 	//---------------------------------------------
 	// To stop cpmmand screen from clossing
 	cout << endl << "e to exit";

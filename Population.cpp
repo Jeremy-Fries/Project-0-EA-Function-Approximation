@@ -34,6 +34,44 @@ vector<Individual>& Population::get_population_set() {
 	return population_set; 
 }
 // --------------------------------------------------
+	// Random integer between 0 and pop_size
+int Population::rand_int(){
+	int p = pop_size;
+	int r = rand() % p;
+	cout << "rand_int is: " << r << endl;
+	return r;
+}
+// --------------------------------------------------
+	// Build new_population_set
+void Population::build_new_pop(){
+	for (int p = 0; p < pop_size; p++){
+		Individual A = population_set.at(rand_int());		// A and B are different classes, won't work this way! Too Tired to finish... :(
+		Individual B = population_set.at(rand_int());
+		if (A.fitness_rating() > B.fitness_rating()){
+			new_population_set.push_back(A);
+			//new_population_set.push_back(mutate(A));
+			break;
+		}
+		else if (A.fitness_rating() < B.fitness_rating()){
+			new_population_set.push_back(B);
+			//new_population_set.push_back(mutate(B));
+			break;
+		}
+		else {
+			cout << endl << "error 1569" << endl;
+			break;
+		}
+	}
+}
+// Get new_population_set									
+vector<Individual>& Population::get_new_population_set() {
+	for (int i = 0; i < pop_size; i++){
+		new_population_set.at(i).get_solution_set();
+		cout << endl;
+	}
+	return new_population_set;
+}
+// --------------------------------------------------
 /* Tournament Selection
 while (nextPopulation too small) {
 Members tournament = randomly choose x members from currentPopulation

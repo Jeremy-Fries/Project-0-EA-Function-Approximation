@@ -106,9 +106,8 @@ double Individual::approx_func(){
 	double x = get_x_pos();
 	double a, b;
 	a = f_1(x, solution_set.at(0), solution_set.at(1));
-	//b = f_2(x, solution_set.at(2), solution_set.at(3));
-	approx_value = (a);
-	//approx_value = (a + b);
+	b = f_2(x, solution_set.at(2), solution_set.at(3));
+	approx_value = (a + b);
 	//cout << endl << "Approximate Value is: " << approx_value << endl;
 	return approx_value;
 }
@@ -118,9 +117,8 @@ double Individual::real_func(){
 	double x = get_x_pos();
 	double a, b;
 	a = f_1(x, real_set.at(0), real_set.at(1));
-	//b = f_2(x, real_set.at(2), real_set.at(3));
-	real_value = (a);
-	//real_value = (a + b);
+	b = f_2(x, real_set.at(2), real_set.at(3));
+	real_value = (a + b);
 	//cout << endl << "real value is: " << real_value << endl;
 	return real_value;
 }
