@@ -18,45 +18,40 @@ public:
 	void set_pop_size(int);
 		// Get Population Size
 	int get_pop_size();
+		// Display Population Size
+	void display_pop_size();
+	// --------------------------------------------------
+		// Set Number of Generations
+	void set_num_gen(int);
+		// Get Number of Generations
+	int get_num_gen();
+		// Display Number of Generations
+	void display_num_gen();
 	// --------------------------------------------------
 		// Build_Population
 	void build_pop(int n);
-	// --------------------------------------------------
 		// Get population_set
+	vector <Individual>& get_population_set();
+		// Display population_set
 	vector <Individual>& display_population_set();
 	// --------------------------------------------------
-	// double f_approx(double x_pos, vector<double> soln);
-	// --------------------------------------------------
-		// Random integer between 0 and pop_size
-	int rand_int();
-
+		// Fitness calculation
 	void calc_fitness();
 	// --------------------------------------------------
-	//	// Build New Population
-	//void build_new_pop();
-	//// --------------------------------------------------
-	//// Get New Population Sset
-	//vector <Individual>& display_new_population_set();
-	// --------------------------------------------------
+		// Down Select Function
 	void down_select();
-
-	// Replicate Function
+	// --------------------------------------------------
+		// Replicate Function
 	void replicate();
-
 	// --------------------------------------------------
-	// Mutate Function
-	void mutate();
-
+		// Generation Loop
+	void Population::generation_loop();
 	// --------------------------------------------------
-	// Replace Function
 
-
-	// --------------------------------------------------
 private:
 	// Variables 
-	int pop_size;
+	int pop_size, num_gen;
 	double x_pos;
 	vector <Individual> population_set;
-	vector <Individual> new_population_set;
 };
 #endif //Population_H
