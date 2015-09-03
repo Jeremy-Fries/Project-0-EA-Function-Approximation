@@ -29,7 +29,7 @@ void Population::display_num_gen(){
 	cout << endl << "Number of Generations is: " << num_gen << endl;
 }
 // --------------------------------------------------
-	// Build population_set
+	// Build population_set // Run Once
 void Population::build_pop(int n){
 	double pre_x = ((double)rand() / RAND_MAX);
 	double x = pre_x * 2*3.1416;
@@ -52,7 +52,9 @@ vector<Individual>& Population::get_population_set() {
 	// Display population_set								
 vector<Individual>& Population::display_population_set() {
 	for (int i = 0; i < pop_size; i++){
-		population_set.at(i).get_solution_set();
+		population_set.at(i).display_solution_set();
+		
+		population_set.at(i).display_fit_rating();
 		cout << endl;
 	}
 	return population_set;
@@ -62,12 +64,13 @@ vector<Individual>& Population::display_population_set() {
 void Population::calc_fitness(){
 	for (int p = 0; p < pop_size; p++){
 		population_set.at(p).fitness_rating();
+		//population_set.at(p).display_fit_rating();
 	}
 }
 // --------------------------------------------------
 	// Down Select Function
 void Population::down_select(){
-	cout << "size in is: " << population_set.size() << endl;
+	//cout << "size in is: " << population_set.size() << endl;
 	int eliminate = pop_size / 2;
 	for (int i=0; i < eliminate; i++){
 		int dex1, dex2;
@@ -76,20 +79,20 @@ void Population::down_select(){
 		while (dex2 == dex1){
 			dex2 = rand() % population_set.size();
 		}
-		cout << "1fit = " << population_set.at(dex1).fit_rating << endl;
-		cout << "2fit = " << population_set.at(dex2).fit_rating << endl;
+		//cout << "1fit = " << population_set.at(dex1).fit_rating << endl;
+		//cout << "2fit = " << population_set.at(dex2).fit_rating << endl;
 		if (population_set.at(dex1).fit_rating>population_set.at(dex2).fit_rating){
 			// dex1 should survive.
-			cout << "1 should survive" << endl;
+			//cout << "1 should survive" << endl;
 			population_set.erase(population_set.begin() + dex2);
 		}
 		else if (population_set.at(dex1).fit_rating < population_set.at(dex2).fit_rating){
-			cout << "2 should survive" << endl;
+			//cout << "2 should survive" << endl;
 			// dex2 should survive.
 			population_set.erase(population_set.begin() + dex1);
 		}
 	}
-	cout << "size is: " << population_set.size() << endl;
+	//cout << "size is: " << population_set.size() << endl;
 }
 // --------------------------------------------------
 	// Replicate Function
@@ -110,11 +113,29 @@ void Population::replicate(){
 	// Generation Loop
 void Population::generation_loop(){
 	for (int g = 0; g < num_gen; g++){
-		cout << endl << "generation is : " << g << endl;
-		calc_fitness();
+		zero_fit_rating();
+		for (int q = 0; q < 20; q++){
+			calc_fitness();
+			double pre_x = ((double)rand() / RAND_MAX);
+			double x = pre_x * 2 * 3.1416;
+			choose_new_x(x);
+		}
+		if (g == num_gen - 1){
+			break;
+		}
 		down_select();
 		replicate();
 	}
 	// Best Fitness Rating Function - picks best approx solution set		// TODO
 }
 // --------------------------------------------------
+void Population::choose_new_x(double nx){
+	for (int p = 0; p < pop_size; p++){
+		population_set.at(p).set_x_pos(nx);
+	}
+}
+void Population::zero_fit_rating(){
+	for (int p = 0; p < pop_size; p++){
+		population_set.at(p).zero_fit_rating();
+	}
+}

@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include "Individual.h"
+#include <ostream>
 
 using namespace std;
 
@@ -45,8 +46,10 @@ public:
 	void replicate();
 	// --------------------------------------------------
 		// Generation Loop
-	void Population::generation_loop();
+	void generation_loop();
 	// --------------------------------------------------
+	void choose_new_x(double);
+	void zero_fit_rating();
 
 private:
 	// Variables 

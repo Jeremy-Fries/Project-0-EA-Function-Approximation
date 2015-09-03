@@ -53,7 +53,7 @@ vector<double>& Individual::get_solution_set() {
 // --------------------------------------------------
 	// Display Solution Set
 vector<double>& Individual::display_solution_set() {
-	cout << endl << "Solution set is: " << endl;
+	//cout << endl << "Solution set is: " << endl;
 	std::copy(solution_set.begin(), solution_set.end(), std::ostream_iterator<double>(std::cout, " "));
 	return solution_set;
 }
@@ -77,11 +77,11 @@ vector<double>& Individual::display_real_set() {
 // --------------------------------------------------			// TODO - MOVE to Function 
 	// Funtions - will be implemented in a header file at a later time
 double Individual::f_1(double x, double a1, double b1){
-	double f = (a1*abs(x*x)) + b1;
+	double f = (a1*abs(x*x)) + b1;											
 	return f;
 }
 double Individual::f_2(double x, double a2, double b2){
-	double f = a2*(sin((b2+1)*x));
+	double f = a2*(sin((b2)*x));
 	return f;
 }
 // --------------------------------------------------			// TODO - MOVE to Function 
@@ -108,18 +108,24 @@ double Individual::approx_func(){
 }
 // --------------------------------------------------
 	// Fitness Rating
-double Individual::fitness_rating(){
-	fit_rating = -abs(real_func() - approx_func());
-	cout << endl << "Fitness Rating is: " << fit_rating << endl;
-	return fit_rating;
+void Individual::fitness_rating(){
+	fit_rating -= abs(real_func() - approx_func());
+}
+	// Zero Fit Rating
+void Individual::zero_fit_rating(){
+	fit_rating = 0;
+}
+	// Display Fitness Rating
+void Individual::display_fit_rating(){
+	cout << "\t Fit Rating = " << fit_rating << endl;
 }
 // --------------------------------------------------
 	// Mutate Function
 		// randomly choose an element from the solution set and add random + or - number.
 void Individual::mutate(){
-	int nu = num_functions;
+	int nu = num_functions*2;
 	int dex = rand() % nu;
-	double range = 0.01;
+	double range = 0.1;										
 	double r1 = ((double)rand() / RAND_MAX) * range;
 	double r2 = ((double)rand() / RAND_MAX) * range;
 	solution_set.at(dex) += r1 - r2;

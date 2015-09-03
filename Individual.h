@@ -57,7 +57,10 @@ public:
 	double approx_func();
 	// --------------------------------------------------
 		// Fitness Rating
-	double fitness_rating();
+	void fitness_rating();
+	void zero_fit_rating();
+		// Display Fitness Rating
+	void display_fit_rating();
 	// --------------------------------------------------
 		// Mutate Function
 	void mutate();

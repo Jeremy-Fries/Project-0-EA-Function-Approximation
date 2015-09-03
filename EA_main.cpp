@@ -29,9 +29,9 @@ int main()
 		// Set Number of Functions
 	pI->set_num_functions(2);			
 		// Set Population Size
-	pP->set_pop_size(10);
+	pP->set_pop_size(100);
 		// Set Number of Generations
-	pP->set_num_gen(100);
+	pP->set_num_gen(500);
 	//---------------------------------------------
 		// Initialize Build Population - Creates initial population 
 	pP->build_pop(pI->get_num_functions());
@@ -47,9 +47,11 @@ int main()
 	cout << endl << "Best Approx Solution is: " << "place holder" << endl;
 	
 		// Display Real Coefficient
-	cout << endl << "Real Coefficient is: " << "place holder" << endl;
+	cout << endl << "Real Coefficient is: " << "place holder" << endl << endl;
 	//pP->display_population_set();
 	
+	pP->display_population_set();
+
 		// Display Number of Functions
 	pI->display_num_functions();
 		// Display Population Size
@@ -57,7 +59,7 @@ int main()
 		// Display Number of Generations
 	pP->display_num_gen();
 		// To stop command screen from clossing
-	cout << endl << "e to exit";
+	cout << endl << "e to exit" << endl;
 	cin >> e;
 	//---------------------------------------------
 
